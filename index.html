@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dalil Mukhitov — Portfolio</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Anime.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer></script>
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --fg: #fafafa;
+      --accent: #ff5f6d;
+      --accent2: #ffc371;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    /* Transitions for language switch */
+    .hide {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    /* ---------- Navigation ---------- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(6px);
+    }
+
+    nav .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--fg);
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transition: width 0.4s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent2);
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Language selector */
+    #lang-select {
+      margin-left: 2rem;
+      padding: 0.3rem 0.6rem;
+      background: #171717;
+      border: none;
+      border-radius: 6px;
+      color: var(--fg);
+      font-family: inherit;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* ---------- Hero ---------- */
+    header.hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, var(--bg) 100%);
+      overflow: hidden;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: #bbbbbb;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      animation: bounce 2s infinite;
+      color: var(--accent2);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-8px);
+      }
+      60% {
+        transform: translateY(-4px);
+      }
+    }
+
+    /* ---------- Sections ---------- */
+    section {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 2.4rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    section h2::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -8px;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 3px;
+    }
+
+    /* About */
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: #171717;
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .project-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+
+    .project-card p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #cccccc;
+    }
+
+    /* Contact */
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-links a {
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .contact-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      width: 0;
+      background: var(--accent2);
+      transition: width 0.4s ease;
+    }
+
+    .contact-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.85rem;
+      color: #888;
+      background: #111;
+    }
+
+    /* ---------- Responsive Tweaks ---------- */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+      nav .logo {
+        font-size: 1.2rem;
+      }
+      #lang-select {
+        margin-left: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <span class="logo">Dalil.dev</span>
+
+    <ul>
+      <li><a href="#about" data-en="About" data-ru="Обо мне">About</a></li>
+      <li><a href="#projects" data-en="Projects" data-ru="Проекты">Projects</a></li>
+      <li><a href="#contact" data-en="Contact" data-ru="Контакты">Contact</a></li>
+    </ul>
+
+    <select id="lang-select" aria-label="Language selector">
+      <option value="en">EN</option>
+      <option value="ru">RU</option>
+    </select>
+  </nav>
+
+  <header class="hero" id="top">
+    <h1 class="hero-title">Dalil Mukhitov</h1>
+    <p class="hero-subtitle" data-en="Enterprise Systems Management Engineer &amp; Creative Technologist" data-ru="Инженер по управлению корпоративными системами &amp; креативный технолог">Enterprise Systems Management Engineer &amp; Creative Technologist</p>
+    <a href="#about" class="scroll-down" data-en="SCROLL ↓" data-ru="ВНИЗ ↓">SCROLL&nbsp;↓</a>
+  </header>
+
+  <section id="about" class="about">
+    <h2 data-en="About&nbsp;Me" data-ru="Обо&nbsp;мне">About&nbsp;Me</h2>
+    <p data-en="Experienced SCCM administrator and automation enthusiast passionate about bridging enterprise IT with intuitive user experiences. I engineer scalable deployment solutions, design internal tools, and explore creative coding to visualize complex systems." data-ru="Опытный администратор SCCM и энтузиаст автоматизации, увлечённый объединением корпоративного IT с удобными пользовательскими интерфейсами. Разрабатываю масштабируемые решения для развёртывания, создаю внутренние инструменты и исследую креативное программирование для визуализации сложных систем.">
+      Experienced SCCM administrator and automation enthusiast passionate about bridging enterprise IT with intuitive user experiences. I engineer scalable deployment solutions, design internal tools, and explore creative coding to visualize complex systems.
+    </p>
+  </section>
+
+  <section id="projects" class="projects">
+    <h2 data-en="Selected&nbsp;Projects" data-ru="Выбранные&nbsp;проекты">Selected&nbsp;Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3 data-en="Network Traffic&nbsp;Simulator" data-ru="Симулятор&nbsp;сетевого&nbsp;трафика">Network Traffic&nbsp;Simulator</h3>
+        <p data-en="Interactive React application that visualizes packet flow across SVG-based network diagrams, inspired by games like Oxygen Not&nbsp;Included." data-ru="Интерактивное React‑приложение, визуализирующее поток пакетов по SVG‑схемам сети, вдохновлено играми вроде Oxygen Not&nbsp;Included.">
+          Interactive React application that visualizes packet flow across SVG-based network diagrams, inspired by games like <em>Oxygen Not&nbsp;Included</em>.
+        </p>
+      </div>
+      <div class="project-card">
+        <h3 data-en="SCCM Health&nbsp;Dashboard" data-ru="Панель&nbsp;здоровья&nbsp;SCCM">SCCM Health&nbsp;Dashboard</h3>
+        <p data-en="Grafana-powered dashboard integrating with SQL views to monitor 8k+ endpoints, peer-cache efficiency, and Windows 11 migration progress." data-ru="Панель на базе Grafana, объединяющая SQL‑представления для мониторинга 8k+ устройств, эффективности peer‑cache и прогресса миграции на Windows 11.">
+          Grafana-powered dashboard integrating with SQL views to monitor 8k+ endpoints, peer-cache efficiency, and Windows 11 migration progress.
+        </p>
+      </div>
+      <div class="project-card">
+        <h3 data-en="Zero-Touch WinPE&nbsp;Toolkit" data-ru="Инструментарий&nbsp;Zero‑Touch&nbsp;WinPE">Zero-Touch WinPE&nbsp;Toolkit</h3>
+        <p data-en="Custom WinPE image and PowerShell toolset enabling rapid bare-metal provisioning with dynamic driver injection and automated compliance checks." data-ru="Пользовательский образ WinPE и набор PowerShell‑утилит для быстрого развертывания с динамической интеграцией драйверов и автоматическими проверками соответствия.">
+          Custom WinPE image and PowerShell toolset enabling rapid bare-metal provisioning with dynamic driver injection and automated compliance checks.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2 data-en="Get&nbsp;in&nbsp;Touch" data-ru="Свяжитесь&nbsp;со&nbsp;мной">Get&nbsp;in&nbsp;Touch</h2>
+    <div class="contact-links">
+      <a href="mailto:dalil@example.com">Email</a>
+      <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer data-en="© 2025 Dalil Mukhitov. Built with ♥ and anime.js." data-ru="© 2025 Далиль Мухитов. Сделано с ♥ на anime.js.">
+    © 2025 Dalil Mukhitov. Built with ♥ and anime.js.
+  </footer>
+
+  <script>
+    /* ------------------ HERO TITLE LETTER ANIMATION ------------------ */
+    document.addEventListener("DOMContentLoaded", () => {
+      const title = document.querySelector(".hero-title");
+      title.innerHTML = title.textContent.replace(/[^\s]/g, "<span class='letter'>$&</span>");
+
+      anime
+        .timeline({ loop: false })
+        .add({
+          targets: ".hero-title .letter",
+          translateY: [100, 0],
+          opacity: [0, 1],
+          easing: "easeOutExpo",
+          duration: 1500,
+          delay: (el, i) => 30 * i,
+        })
+        .add({
+          targets: ".scroll-down",
+          opacity: [0, 1],
+          duration: 600,
+          easing: "easeInOutQuad",
+        });
+
+      /* ------------------ SCROLL REVEAL USING IntersectionObserver ------------------ */
+      const revealEls = document.querySelectorAll("section, nav");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              anime({
+                targets: entry.target,
+                opacity: [0, 1],
+                translateY: [40, 0],
+                duration: 800,
+                easing: "easeOutExpo",
+                delay: 100,
+              });
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      revealEls.forEach((el) => {
+        el.style.opacity = 0;
+        observer.observe(el);
+      });
+
+      /* ------------------ LANGUAGE SWITCHER ------------------ */
+      const langSelect = document.getElementById("lang-select");
+      langSelect.addEventListener("change", (e) => {
+        const lang = e.target.value;
+        const elements = document.querySelectorAll("[data-en]");
+
+        elements.forEach((el) => {
+          el.classList.add("hide");
+        });
+
+        setTimeout(() => {
+          elements.forEach((el) => {
+            const newText = el.getAttribute(`data-${lang}`);
+            if (newText) {
+              el.innerHTML = newText;
+            }
+            el.classList.remove("hide");
+          });
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>
