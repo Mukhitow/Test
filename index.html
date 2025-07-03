@@ -16,16 +16,19 @@
     <nav>
         <span class="logo">Dalil.dev</span>
 
-        <ul>
+        <button class="burger" id="burger">&#9776;</button>
+
+        <ul class="nav-links" id="nav-links">
             <li><a href="#about" data-key="about">About</a></li>
             <li><a href="#projects" data-key="projects">Projects</a></li>
             <li><a href="#contact" data-key="contact">Contact</a></li>
+            <li>
+                <select id="lang-select" aria-label="Language selector">
+                    <option value="en">EN</option>
+                    <option value="ru">RU</option>
+                </select>
+            </li>
         </ul>
-
-        <select id="lang-select" aria-label="Language selector">
-            <option value="en">EN</option>
-            <option value="ru">RU</option>
-        </select>
     </nav>
 
     <!-- внутри <body> -->
@@ -145,14 +148,14 @@
     <section id="contact" class="contact">
         <h2 data-key="contactTitle">Get&nbsp;in&nbsp;Touch</h2>
         <div class="contact-links">
-            <a href="mailto:muhitow@bk.ru">Email</a>
+            <a href="mailto:mukhitow@gmail.com">Email</a>
             <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
             <a href="https://www.linkedin.com/in/mukhitow/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
     </section>
 
     <footer data-key="footer">
-        © 2025 Dalil Mukhitov — Infrastructure + Automation, built with ♥ and anime.js.
+        © 2025 Dalil Mukhitov. Built with ♥ and anime.js.
     </footer>
 
 

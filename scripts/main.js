@@ -111,3 +111,10 @@ const timelineObserver = new IntersectionObserver(
 timelineItems.forEach((item) => {
     timelineObserver.observe(item);
 });
+// --- Burger menu toggle ---
+const burger = document.getElementById("burger");
+const navLinks = document.getElementById("nav-links");
+
+burger.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+});
