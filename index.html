@@ -1,416 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dalil Mukhitov — Portfolio</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-  <!-- Anime.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer></script>
-  <style>
-    :root {
-      --bg: #0d0d0d;
-      --fg: #fafafa;
-      --accent: #ff5f6d;
-      --accent2: #ffc371;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      font-family: "Poppins", sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
-
-    /* Transitions for language switch */
-    .hide {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    /* ---------- Navigation ---------- */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      backdrop-filter: blur(6px);
-    }
-
-    nav .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--fg);
-      position: relative;
-      transition: color 0.3s ease;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transition: width 0.4s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent2);
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Language selector */
-    #lang-select {
-      margin-left: 2rem;
-      padding: 0.3rem 0.6rem;
-      background: #171717;
-      border: none;
-      border-radius: 6px;
-      color: var(--fg);
-      font-family: inherit;
-      cursor: pointer;
-      outline: none;
-    }
-
-    /* ---------- Hero ---------- */
-    header.hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, var(--bg) 100%);
-      overflow: hidden;
-    }
-
-    .hero-title {
-      font-size: clamp(2.5rem, 7vw, 6rem);
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      margin-top: 1rem;
-      font-size: 1.25rem;
-      font-weight: 300;
-      color: #bbbbbb;
-    }
-
-    .scroll-down {
-      position: absolute;
-      bottom: 2rem;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      animation: bounce 2s infinite;
-      color: var(--accent2);
-    }
-
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-      }
-      40% {
-        transform: translateY(-8px);
-      }
-      60% {
-        transform: translateY(-4px);
-      }
-    }
-
-    /* ---------- Sections ---------- */
-    section {
-      padding: 6rem 3rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    section h2 {
-      font-size: 2.4rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      position: relative;
-    }
-
-    section h2::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -8px;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      border-radius: 3px;
-    }
-
-    /* About */
-    .about p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      max-width: 800px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-
-    .project-card {
-      background: #171717;
-      border-radius: 12px;
-      padding: 2rem 1.5rem;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-      cursor: pointer;
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px) scale(1.02);
-    }
-
-    .project-card h3 {
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-      color: var(--accent);
-    }
-
-    .project-card p {
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: #cccccc;
-    }
-
-    /* Contact */
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .contact-links a {
-      text-decoration: none;
-      color: var(--fg);
-      font-weight: 600;
-      position: relative;
-    }
-
-    .contact-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      height: 2px;
-      width: 0;
-      background: var(--accent2);
-      transition: width 0.4s ease;
-    }
-
-    .contact-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      font-size: 0.85rem;
-      color: #888;
-      background: #111;
-    }
-
-    /* ---------- Responsive Tweaks ---------- */
-    @media (max-width: 768px) {
-      nav ul {
-        gap: 1rem;
-      }
-      nav .logo {
-        font-size: 1.2rem;
-      }
-      #lang-select {
-        margin-left: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dalil Mukhitov — Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="styles/main.css" />
 </head>
+
 <body>
-  <nav>
-    <span class="logo">Dalil.dev</span>
+    <nav>
+        <span class="logo">Dalil.dev</span>
 
-    <ul>
-      <li><a href="#about" data-en="About" data-ru="Обо мне">About</a></li>
-      <li><a href="#projects" data-en="Projects" data-ru="Проекты">Projects</a></li>
-      <li><a href="#contact" data-en="Contact" data-ru="Контакты">Contact</a></li>
-    </ul>
+        <ul>
+            <li><a href="#about" data-key="about">About</a></li>
+            <li><a href="#projects" data-key="projects">Projects</a></li>
+            <li><a href="#contact" data-key="contact">Contact</a></li>
+        </ul>
 
-    <select id="lang-select" aria-label="Language selector">
-      <option value="en">EN</option>
-      <option value="ru">RU</option>
-    </select>
-  </nav>
+        <select id="lang-select" aria-label="Language selector">
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+        </select>
+    </nav>
 
-  <header class="hero" id="top">
-    <h1 class="hero-title">Dalil Mukhitov</h1>
-    <p class="hero-subtitle" data-en="Enterprise Systems Management Engineer &amp; Creative Technologist" data-ru="Инженер по управлению корпоративными системами &amp; креативный технолог">Enterprise Systems Management Engineer &amp; Creative Technologist</p>
-    <a href="#about" class="scroll-down" data-en="SCROLL ↓" data-ru="ВНИЗ ↓">SCROLL&nbsp;↓</a>
-  </header>
+    <!-- внутри <body> -->
+    <header class="hero" id="top">
+        <h1 class="hero-title">Dalil Mukhitov</h1>
+        <p class="hero-subtitle" data-key="heroSubtitle">Enterprise IT Infrastructure Engineer &amp; Automation
+            Specialist</p>
+        <a href="#about" class="scroll-down" data-key="scroll">SCROLL ↓</a>
+    </header>
 
-  <section id="about" class="about">
-    <h2 data-en="About&nbsp;Me" data-ru="Обо&nbsp;мне">About&nbsp;Me</h2>
-    <p data-en="Experienced SCCM administrator and automation enthusiast passionate about bridging enterprise IT with intuitive user experiences. I engineer scalable deployment solutions, design internal tools, and explore creative coding to visualize complex systems." data-ru="Опытный администратор SCCM и энтузиаст автоматизации, увлечённый объединением корпоративного IT с удобными пользовательскими интерфейсами. Разрабатываю масштабируемые решения для развёртывания, создаю внутренние инструменты и исследую креативное программирование для визуализации сложных систем.">
-      Experienced SCCM administrator and automation enthusiast passionate about bridging enterprise IT with intuitive user experiences. I engineer scalable deployment solutions, design internal tools, and explore creative coding to visualize complex systems.
-    </p>
-  </section>
-
-  <section id="projects" class="projects">
-    <h2 data-en="Selected&nbsp;Projects" data-ru="Выбранные&nbsp;проекты">Selected&nbsp;Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card">
-        <h3 data-en="Network Traffic&nbsp;Simulator" data-ru="Симулятор&nbsp;сетевого&nbsp;трафика">Network Traffic&nbsp;Simulator</h3>
-        <p data-en="Interactive React application that visualizes packet flow across SVG-based network diagrams, inspired by games like Oxygen Not&nbsp;Included." data-ru="Интерактивное React‑приложение, визуализирующее поток пакетов по SVG‑схемам сети, вдохновлено играми вроде Oxygen Not&nbsp;Included.">
-          Interactive React application that visualizes packet flow across SVG-based network diagrams, inspired by games like <em>Oxygen Not&nbsp;Included</em>.
+    <section id="about" class="about">
+        <h2 data-key="aboutTitle">About&nbsp;Me</h2>
+        <p data-key="aboutText">
+            Experienced IT engineer with 7+ years in enterprise infrastructure, specializing in SCCM/MECM, Microsoft
+            365, Exchange, and Azure AD. I focus on scalable deployment automation, secure update management, and
+            internal web tools development using PowerShell, Python, and Docker. Known for my attention to detail,
+            problem-solving, and building stable IT ecosystems tailored for large organizations.
         </p>
-      </div>
-      <div class="project-card">
-        <h3 data-en="SCCM Health&nbsp;Dashboard" data-ru="Панель&nbsp;здоровья&nbsp;SCCM">SCCM Health&nbsp;Dashboard</h3>
-        <p data-en="Grafana-powered dashboard integrating with SQL views to monitor 8k+ endpoints, peer-cache efficiency, and Windows 11 migration progress." data-ru="Панель на базе Grafana, объединяющая SQL‑представления для мониторинга 8k+ устройств, эффективности peer‑cache и прогресса миграции на Windows 11.">
-          Grafana-powered dashboard integrating with SQL views to monitor 8k+ endpoints, peer-cache efficiency, and Windows 11 migration progress.
-        </p>
-      </div>
-      <div class="project-card">
-        <h3 data-en="Zero-Touch WinPE&nbsp;Toolkit" data-ru="Инструментарий&nbsp;Zero‑Touch&nbsp;WinPE">Zero-Touch WinPE&nbsp;Toolkit</h3>
-        <p data-en="Custom WinPE image and PowerShell toolset enabling rapid bare-metal provisioning with dynamic driver injection and automated compliance checks." data-ru="Пользовательский образ WinPE и набор PowerShell‑утилит для быстрого развертывания с динамической интеграцией драйверов и автоматическими проверками соответствия.">
-          Custom WinPE image and PowerShell toolset enabling rapid bare-metal provisioning with dynamic driver injection and automated compliance checks.
-        </p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact" class="contact">
-    <h2 data-en="Get&nbsp;in&nbsp;Touch" data-ru="Свяжитесь&nbsp;со&nbsp;мной">Get&nbsp;in&nbsp;Touch</h2>
-    <div class="contact-links">
-      <a href="mailto:dalil@example.com">Email</a>
-      <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </section>
+    <section id="projects" class="projects">
+        <h2 data-key="projectsTitle">Selected&nbsp;Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3 data-key="project1Title">SCCM Automation Toolkit</h3>
+                <p data-key="project1Text">
+                    A robust set of PowerShell, Python, and AHK scripts integrated into SCCM infrastructure for
+                    automated software deployment, compliance enforcement, log collection, and troubleshooting.
+                </p>
+            </div>
+            <div class="project-card">
+                <h3 data-key="project2Title">Windows Deployment & Imaging System</h3>
+                <p data-key="project2Text">
+                    Customized WinPE, optimized Task Sequences, dynamic driver injection, and version control for
+                    scalable OS deployment aligned with corporate policies.
+                </p>
+            </div>
+            <div class="project-card">
+                <h3 data-key="project3Title">Internal IT Services Dashboard</h3>
+                <p data-key="project3Text">
+                    Internal web apps containerized with Docker to visualize SCCM stats, automate tasks, track
+                    inventory, and provide interactive tools for IT and Help Desk teams.
+                </p>
+            </div>
+        </div>
+    </section>
 
-  <footer data-en="© 2025 Dalil Mukhitov. Built with ♥ and anime.js." data-ru="© 2025 Далиль Мухитов. Сделано с ♥ на anime.js.">
-    © 2025 Dalil Mukhitov. Built with ♥ and anime.js.
-  </footer>
 
-  <script>
-    /* ------------------ HERO TITLE LETTER ANIMATION ------------------ */
-    document.addEventListener("DOMContentLoaded", () => {
-      const title = document.querySelector(".hero-title");
-      title.innerHTML = title.textContent.replace(/[^\s]/g, "<span class='letter'>$&</span>");
 
-      anime
-        .timeline({ loop: false })
-        .add({
-          targets: ".hero-title .letter",
-          translateY: [100, 0],
-          opacity: [0, 1],
-          easing: "easeOutExpo",
-          duration: 1500,
-          delay: (el, i) => 30 * i,
-        })
-        .add({
-          targets: ".scroll-down",
-          opacity: [0, 1],
-          duration: 600,
-          easing: "easeInOutQuad",
-        });
+    <section id="skills" class="skills">
+        <h2>Skills & Experience</h2>
 
-      /* ------------------ SCROLL REVEAL USING IntersectionObserver ------------------ */
-      const revealEls = document.querySelectorAll("section, nav");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              anime({
-                targets: entry.target,
-                opacity: [0, 1],
-                translateY: [40, 0],
-                duration: 800,
-                easing: "easeOutExpo",
-                delay: 100,
-              });
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.15 }
-      );
+        <div class="skills-grid">
+            <div class="skill-tile">
+                <h3>SCCM / MECM</h3>
+                <p>OSD, WSUS, ADR, Compliance, Monitoring, Reporting, Client Troubleshooting</p>
+            </div>
+            <div class="skill-tile">
+                <h3>PowerShell / Python / AHK</h3>
+                <p>Automation, log parsing, deployment scripting, inventory, scheduling</p>
+            </div>
+            <div class="skill-tile">
+                <h3>Microsoft 365 / Azure AD</h3>
+                <p>Exchange Online, SharePoint, Teams, MFA, Licensing, Identity Management</p>
+            </div>
+            <div class="skill-tile">
+                <h3>Docker</h3>
+                <p>Deploying internal tools and services, containerization, DevOps workflows</p>
+            </div>
+            <div class="skill-tile">
+                <h3>Reverse Engineering</h3>
+                <p>Analyzing MSI/EXE behavior, troubleshooting, registry and log analysis</p>
+            </div>
+            <div class="skill-tile">
+                <h3>Support & IT Ops</h3>
+                <p>Help Desk, documentation, team training, infrastructure stability</p>
+            </div>
+        </div>
 
-      revealEls.forEach((el) => {
-        el.style.opacity = 0;
-        observer.observe(el);
-      });
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="year">2023–Now</div>
+                <div class="content">
+                    <h3>Bank CenterCredit — SCCM Engineer</h3>
+                    <p>Automation of SCCM infrastructure, Compliance Baselines, custom MSI/EXE packaging, Grafana
+                        dashboards, internal tool development.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2023</div>
+                <div class="content">
+                    <h3>Kaspi Bank — SCCM Administrator</h3>
+                    <p>Deployment and maintenance of SCCM, OSD, WSUS, ADR, patching, OS migrations, and client
+                        monitoring.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2021–2023</div>
+                <div class="content">
+                    <h3>Kaspi Bank — Monitoring Specialist</h3>
+                    <p>ATM and terminal monitoring, SLA tracking, incident handling, stability analytics, and
+                        infrastructure support.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="year">2020</div>
+                <div class="content">
+                    <h3>AlmatyEnergoService — IT Engineer</h3>
+                    <p>PC and server assembly, network cabling, DHCP/DNS setup, technical support, procurement, and
+                        infrastructure maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      /* ------------------ LANGUAGE SWITCHER ------------------ */
-      const langSelect = document.getElementById("lang-select");
-      langSelect.addEventListener("change", (e) => {
-        const lang = e.target.value;
-        const elements = document.querySelectorAll("[data-en]");
 
-        elements.forEach((el) => {
-          el.classList.add("hide");
-        });
+    <section id="contact" class="contact">
+        <h2 data-key="contactTitle">Get&nbsp;in&nbsp;Touch</h2>
+        <div class="contact-links">
+            <a href="mailto:muhitow@bk.ru">Email</a>
+            <a href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/mukhitow/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+    </section>
 
-        setTimeout(() => {
-          elements.forEach((el) => {
-            const newText = el.getAttribute(`data-${lang}`);
-            if (newText) {
-              el.innerHTML = newText;
-            }
-            el.classList.remove("hide");
-          });
-        }, 300);
-      });
-    });
-  </script>
+    <footer data-key="footer">
+        © 2025 Dalil Mukhitov — Infrastructure + Automation, built with ♥ and anime.js.
+    </footer>
+
+
+    <!-- Anime.js -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" defer></script>
+    <!-- Main JavaScript -->
+    <script src="scripts/main.js" defer></script>
 </body>
+
 </html>
