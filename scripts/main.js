@@ -118,3 +118,13 @@ const navLinks = document.getElementById("nav-links");
 burger.addEventListener("click", () => {
     navLinks.classList.toggle("show");
 });
+window.addEventListener("scroll", () => {
+    const scrollBtn = document.getElementById("scrollDown");
+    if (window.scrollY > 50) {
+        scrollBtn.style.opacity = "0";
+        scrollBtn.style.pointerEvents = "none";
+    } else {
+        scrollBtn.style.opacity = "1";
+        scrollBtn.style.pointerEvents = "auto";
+    }
+});
