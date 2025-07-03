@@ -366,3 +366,42 @@ footer {
     opacity: 0;
     transform: translateY(30px);
 }
+
+@media (max-width: 600px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .skill-tile {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .timeline {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .timeline-item::before {
+        display: none;
+    }
+
+    .timeline .year {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .timeline .content h3 {
+        font-size: 1rem;
+    }
+
+    .timeline .content p {
+        font-size: 0.9rem;
+    }
+
+    .education li {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}
