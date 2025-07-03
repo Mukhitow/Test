@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(el);
     });
 
+
     // --- LANGUAGE SWITCHER ---
     const langSelect = document.getElementById("lang-select");
 
@@ -80,12 +81,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Save default English text as fallback
     const elements = document.querySelectorAll("[data-key]");
     elements.forEach((el) => {
         el.setAttribute("data-default", el.innerHTML);
     });
+
+    // --- Burger menu toggle ---
+    const burger = document.getElementById("burger");
+    const navLinks = document.getElementById("nav-links");
+
+    burger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+    });
 });
+
 // --- Timeline Animation ---
 const timelineItems = document.querySelectorAll(".timeline-item");
 
@@ -110,21 +119,4 @@ const timelineObserver = new IntersectionObserver(
 
 timelineItems.forEach((item) => {
     timelineObserver.observe(item);
-});
-// --- Burger menu toggle ---
-const burger = document.getElementById("burger");
-const navLinks = document.getElementById("nav-links");
-
-burger.addEventListener("click", () => {
-    navLinks.classList.toggle("show");
-});
-window.addEventListener("scroll", () => {
-    const scrollBtn = document.getElementById("scrollDown");
-    if (window.scrollY > 50) {
-        scrollBtn.style.opacity = "0";
-        scrollBtn.style.pointerEvents = "none";
-    } else {
-        scrollBtn.style.opacity = "1";
-        scrollBtn.style.pointerEvents = "auto";
-    }
 });
