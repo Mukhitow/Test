@@ -310,6 +310,7 @@ footer {
     border-left: 3px solid var(--accent);
     padding-left: 2rem;
     margin-left: 1rem;
+    margin-top: 3rem;
     position: relative;
 }
 
