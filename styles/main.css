@@ -126,6 +126,7 @@ header.hero {
     font-size: 0.9rem;
     letter-spacing: 2px;
     animation: bounce 2s infinite;
+    text-decoration: none;
     color: var(--accent2);
 }
 
